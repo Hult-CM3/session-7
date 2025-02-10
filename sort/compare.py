@@ -42,9 +42,9 @@ def compare_sorting_algorithms(arr_size=1000):
 
     # Test cases to try - read from files with fallback to generated arrays
     test_arrays = {
-        "Random": read_array_from_file("/_to_test/random5000.txt"),
-        "Already Sorted": read_array_from_file("/_to_test/sorted5000.txt"),
-        "Reverse Sorted": read_array_from_file("/_to_test/reversed5000.txt")
+        "Random": read_array_from_file("/workspaces/session-7/sort/to_test/random5000.txt"),  # <—— CHANGE THESE FILE NAMES
+        "Already Sorted": read_array_from_file("/workspaces/session-7/sort/to_test/sorted5000.txt"),  # <—— CHANGE THESE FILE NAMES
+        "Reverse Sorted": read_array_from_file("/workspaces/session-7/sort/to_test/reversed5000.txt")  # <—— CHANGE THESE FILE NAMES
     }
     
     # Dictionary to store all sorting functions
@@ -73,12 +73,12 @@ def compare_sorting_algorithms(arr_size=1000):
 
 def main():
     results = compare_sorting_algorithms()
-    print("\nResults:")
+"""     print("\nResults:")
     print("-" * 50)
     for array_type, timing_data in results.items():
         print(f"\n{array_type} array:")
         for sort_name, time_taken in timing_data.items():
             print(f"{sort_name}: {time_taken:.4f} seconds")
-
+ """
 if __name__ == "__main__":
     main()
