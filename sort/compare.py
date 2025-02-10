@@ -1,3 +1,5 @@
+# main.py
+
 import time
 import random
 from sort import SortingAlgorithms
@@ -12,16 +14,37 @@ def measure_sort_time(sort_func, arr):
 
 def compare_sorting_algorithms(arr_size=1000):
     """Compare the performance of different sorting algorithms."""
-    # Create test arrays
-    random_array = [random.randint(1, 1000) for _ in range(arr_size)]
-    sorted_array = list(range(arr_size))
-    reverse_array = list(range(arr_size, 0, -1))
-    
-    # Test cases to try
+    def read_array_from_file(filename):
+        """Read array from a file. Supports txt and csv formats."""
+        try:
+            with open(filename, 'r') as file:
+                if filename.endswith('.csv'):
+                    # For CSV files, use csv module
+                    import csv
+                    reader = csv.reader(file)
+                    # Read first row and convert to integers
+                    return [int(x.strip()) for x in next(reader) if x.strip()]
+                else:
+                    # For txt files, assume one number per line or space-separated
+                    content = file.read()
+                    if '\n' in content:
+                        # One number per line
+                        return [int(x.strip()) for x in content.split('\n') if x.strip()]
+                    else:
+                        # Space-separated numbers
+                        return [int(x.strip()) for x in content.split() if x.strip()]
+        except FileNotFoundError:
+            print(f"Warning: {filename} not found. Using default array.")
+            return [random.randint(1, 1000) for _ in range(arr_size)]
+        except (ValueError, csv.Error) as e:
+            print(f"Error reading {filename}: {e}. Using default array.")
+            return [random.randint(1, 1000) for _ in range(arr_size)]
+
+    # Test cases to try - read from files with fallback to generated arrays
     test_arrays = {
-        "Random": random_array,
-        "Already Sorted": sorted_array,
-        "Reverse Sorted": reverse_array
+        "Random": read_array_from_file("/_to_test/random5000.txt"),
+        "Already Sorted": read_array_from_file("/_to_test/sorted5000.txt"),
+        "Reverse Sorted": read_array_from_file("/_to_test/reversed5000.txt")
     }
     
     # Dictionary to store all sorting functions
@@ -48,13 +71,14 @@ def compare_sorting_algorithms(arr_size=1000):
             
     return results
 
+def main():
+    results = compare_sorting_algorithms()
+    print("\nResults:")
+    print("-" * 50)
+    for array_type, timing_data in results.items():
+        print(f"\n{array_type} array:")
+        for sort_name, time_taken in timing_data.items():
+            print(f"{sort_name}: {time_taken:.4f} seconds")
+
 if __name__ == "__main__":
-    # Run comparison with different array sizes
-    print("Testing with small array (100 elements)")
-    results_small = compare_sorting_algorithms(100)
-    
-    print("\nTesting with medium array (1000 elements)")
-    results_medium = compare_sorting_algorithms(1000)
-    
-    print("\nTesting with large array (5000 elements)")
-    results_large = compare_sorting_algorithms(5000)
+    main()
