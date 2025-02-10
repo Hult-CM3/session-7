@@ -1,5 +1,4 @@
-# Do not change this file!!
-
+# DO NOT CHANGE THIS FILE!
 
 class SortingAlgorithms:
     def sort_one(self, lst):
