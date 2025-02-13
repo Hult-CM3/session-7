@@ -1,11 +1,8 @@
-sort1 uses: TODO
+sort1 uses: Bubble Sort
+How do you know?: The code in sort1 repeatedly passes through the list, comparing adjacent pairs and swapping them if they are in the wrong order. This “bubbling” effect—where larger (or smaller) elements move toward the end—is a clear signature of bubble sort. Additionally, testing shows that the algorithm makes many passes on a reverse-sorted array but quickly completes on an already sorted array, which is typical behavior for bubble sort.
 
-How do you know?: TODO
+sort2 uses: Selection Sort
+How do you know?: The code in sort2 searches through the unsorted section of the array to find the smallest element and then swaps it with the element at the beginning of that section. This systematic “selection” of the minimum element on each pass is the hallmark of the selection sort. Also, performance tests indicate that the number of comparisons remains almost constant regardless of the initial order, which aligns with the selection sort’s characteristic behavior.
 
-sort2 uses: TODO
-
-How do you know?: TODO
-
-sort3 uses: TODO
-
-How do you know?: TODO
+sort3 uses: Merge Sort
+How do you know?: In sort3, the array is recursively divided into two halves until individual elements are reached, and then these halves are merged back together in sorted order using a dedicated merge function. This divide-and-conquer approach, and the merging step, is the classic implementation of merge sort. Performance tests on large datasets show an O(n log n) behavior, further confirming that merge sort is used.
